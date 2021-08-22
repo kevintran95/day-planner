@@ -16,6 +16,23 @@ var currentDate = moment().format("dddd") + moment().format("MMM Do YYYY");
 var currentTime = moment().format('h:mm:ss a');
 var hour = moment().hours();
 
+
+function control () {
+      
+    $(".form-control").each(function () {
+        var test = parseInt($(this).attr("id"));
+        hour = parseInt(hour);
+       
+        if (hour > test) {
+            $(this).addClass("past");
+        } else if (hour < test) {
+            $(this).addClass("future");
+        } else {
+            $(this).addClass("present");
+        }
+    });
+  }
+
  function init() {
      
     console.log("Current Hour" + hour)
@@ -51,19 +68,19 @@ var hour = moment().hours();
 
  }
 
- function control () {
-      
-    $(".form-control").each(function () {
-        var test = parseInt($(this).attr("id"));
-        hour = parseInt(hour);
-       
-        if (hour > test) {
-            $(this).addClass("past");
-        } else if (hour < test) {
-            $(this).addClass("future");
-        } else {
-            $(this).addClass("present");
-        }
-    });
-  }
-        
+
+ $(document).ready(function() {
+     control()
+     init()
+ })
+
+ var interval = setInterval(function() {
+     var presentTime = moment();
+     $("#currentDay").html(presentTime.format('MMM DD YYYY') + " " + presentTime.format("dddd").substring (0,2).toUpperCase());
+     $("#currentDay").html(currentDate + " " + presentTime.format("hh:mm:ss a"));
+ }, 100);
+
+ $(".save-btn").on("click", function () {
+     userInput = $(this).sibling(".form-ctrl").val().trim();
+     console.log(userInput);
+ })
