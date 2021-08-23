@@ -65,7 +65,7 @@ var interval = setInterval(function() {
 
  function control () {
       
-    $(".form-control").each(function () {
+    $(".form-ctrl").each(function () {
         var test = parseInt($(this).attr("id"));
         hour = parseInt(hour);
        
@@ -85,17 +85,13 @@ var interval = setInterval(function() {
     control()
     
 
- $(".save-btn").on("click", function () {
-     userInput = $(this).sibling(".form-ctrl").val().trim();
+ $(".saveBtn").on("click", function () {
+     userInput = $(this).siblings(".form-ctrl").val().trim();
      console.log(userInput);
-     hourSpan = $(this).sibling(".input-box").text().trim();
+     hourSpan = $(this).siblings(".input-box").text().trim();
      console.log(hourSpan);
      localStorage.setItem(hourSpan, JSON.stringify(userInput));
 
- })
- $("deleteBtn").on("click", function() {
-     localStorage.clear();
-     init()
  })
 
 });
